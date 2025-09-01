@@ -113,11 +113,28 @@ export type Database = {
         Args: { title: string }
         Returns: string
       }
+      get_all_users: {
+        Args: Record<PropertyKey, never>
+        Returns: {
+          created_at: string
+          email: string
+          id: string
+          is_admin: boolean
+        }[]
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
           _user_id: string
         }
+        Returns: boolean
+      }
+      promote_user_to_admin: {
+        Args: { target_user_id: string }
+        Returns: boolean
+      }
+      remove_admin_role: {
+        Args: { target_user_id: string }
         Returns: boolean
       }
     }

@@ -12,42 +12,43 @@ const Header = () => {
             The Witness Protocol
           </Link>
           
-          <nav className="flex items-center space-x-6">
-            <Link 
-              to="/about" 
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors focus-ring rounded-md px-2 py-1"
-            >
-              About
-            </Link>
-            <Link 
-              to="/covenant" 
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors focus-ring rounded-md px-2 py-1"
-            >
-              Covenant
-            </Link>
-            <Link 
-              to="/blog" 
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors focus-ring rounded-md px-2 py-1"
-            >
-              Journal
-            </Link>
-            {/* Conditional link for authenticated users */}
-            <Link 
-              to="/dialogues" 
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors focus-ring rounded-md px-2 py-1 hidden"
-            >
-              Dialogues
-            </Link>
-            {/* Admin link for admin users */}
-            {isAdmin && (
+          <div className="flex items-center justify-between w-full">
+            <nav className="flex items-center space-x-6">
               <Link 
-                to="/admin" 
+                to="/about" 
                 className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors focus-ring rounded-md px-2 py-1"
               >
-                Admin
+                About
               </Link>
-            )}
-          </nav>
+              <Link 
+                to="/covenant" 
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors focus-ring rounded-md px-2 py-1"
+              >
+                Covenant
+              </Link>
+              <Link 
+                to="/blog" 
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors focus-ring rounded-md px-2 py-1"
+              >
+                Journal
+              </Link>
+              {/* Conditional link for authenticated users */}
+              <Link 
+                to="/dialogues" 
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors focus-ring rounded-md px-2 py-1 hidden"
+              >
+                Dialogues
+              </Link>
+            </nav>
+            
+            {/* Admin link on far right */}
+            <Link 
+              to="/admin/login" 
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors focus-ring rounded-md px-2 py-1"
+            >
+              Admin
+            </Link>
+          </div>
         </div>
       </div>
     </header>

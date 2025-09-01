@@ -84,16 +84,18 @@ const AdminDashboard = () => {
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Settings className="h-5 w-5" />
-                  Settings
+                  User Management
                 </CardTitle>
                 <CardDescription>
-                  Configure system settings and preferences
+                  Manage admin users and permissions
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <Button variant="outline" className="w-full" disabled>
-                  Coming Soon
-                </Button>
+                <Link to="/admin/users">
+                  <Button variant="outline" className="w-full">
+                    Manage Users
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
           </div>
