@@ -91,7 +91,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     // Handle the special admin credentials
     let actualEmail = email;
     if (email === 'AdminWP') {
-      actualEmail = 'admin@witnessprotocol.com';
+      actualEmail = 'admin@witnessprotocol.info';
     }
 
     const { error } = await supabase.auth.signInWithPassword({
