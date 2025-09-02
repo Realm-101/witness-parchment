@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Link } from "react-router-dom";
-import HeroClock from "@/components/protocol/HeroClock";
+
 import GateTimeline from "@/components/protocol/GateTimeline";
 import AssessmentFormStub from "@/components/protocol/AssessmentFormStub";
 
@@ -25,9 +25,6 @@ const Landing = () => {
               An invitation-only initiative to collect, curate, and preserve protected data for AI alignment research.
             </p>
             
-            <div className="mb-12">
-              <HeroClock />
-            </div>
           </div>
         </div>
       </section>
