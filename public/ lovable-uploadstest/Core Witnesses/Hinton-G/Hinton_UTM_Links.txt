@@ -1,0 +1,8 @@
+Primary CTA:
+https://witnessprotocol.info/gate?utm_source=outreach&utm_medium=email&utm_campaign=wave1&utm_content=hinton
+
+Personalized path (suggested to publish):
+https://witnessprotocol.info/w/hinton
+
+Optional compact link for DMs (use a redirect rule to point to the personalized path):
+https://witnessprotocol.info/g?h=hinton  ->  /w/hinton

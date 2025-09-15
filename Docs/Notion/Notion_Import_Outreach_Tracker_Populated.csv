@@ -1,0 +1,31 @@
+Name,Segment,Email/Handle,Intro Path,Status,Date Sent,Response,Next Step,Willingness (Endorse/Assess/Advise),Notes
+Geoffrey Hinton,Anchor,,Warm intro via academic network; assistant route,Ready,,,Send long email + follow-up in 6d,,Hooks: warned early; encode what must not be lost. Channel: assistant/email.
+Mo Gawdat,Anchor,,LinkedIn + speaking agent,Ready,,,"Send long email; if no reply, short email",,Hooks: operationalize compassion in training data.
+Yoshua Bengio,Anchor,marie-josee.beauchamp@mila.quebec,Assistant email (per doc),Ready,,,Send long email; tailor prompt to his safety work,,Hooks: foundational witness for high-signal dataset.
+Stuart Russell,Anchor,jp@humancompatible.ai,Assistant email (per doc),Ready,,,Send long email,,Hooks: 'Human Compatible' inheritance; help with rubric.
+Kate Crawford,Anchor,info@katecrawford.net,Assistant email (per doc),Ready,,,Send long email,,Hooks: Atlas of AI → living archive countering power.
+Timnit Gebru,Anchor,@timnitGebru@dair-community.social,Mastodon DM (per doc) / email via DAIR site,Ready,,,Send short email + DM variant,,Hooks: fight bias at the root; dataset norms.
+Joy Buolamwini,Anchor,,Warm intro via AJL; LinkedIn if needed,Ready,,,Send long email,,Hooks: from audits to authorship; encode justice.
+Jaan Tallinn,Anchor,,Secure channel / aligned fund network (per doc),Ready,,,Send long email; include milestones,,Hooks: EA-aligned lifeboat; philanthropy tied to signal quality.
+Paul Christiano,Alignment & Safety,,Warm intro via alignment community,,,,Send long email,,Hooks: co-design pairwise qualitative ranker + meta-evals.
+Richard Ngo,Alignment & Safety,,Warm intro via safety/AGI community,,,,Send long email,,Hooks: stress-test prompts; define success criteria.
+Rohin Shah,Alignment & Safety,,Newsletter/email on site; warm intro if possible,,,,Send long email,,Hooks: categorize testimony themes; measurables.
+Connor Leahy,Alignment & Safety,,X DM or LinkedIn; warm intro if available,,,,Send long email,,Hooks: red-team Inquisitor; empathy-lookalike jailbreaks.
+Eliezer Yudkowsky,Alignment & Safety,,Warm intro only,,,,Short cameo ask; avoid brand overshadow,,Hooks: edge-case interrogations; one provocative prompt.
+Martha Nussbaum,Ethics/Philosophy,,Academic email via Univ. page; warm intro,,,,Send long email,,Hooks: encode dignity/capabilities as constraints.
+Peter Singer,Ethics/Philosophy,,Academic page; warm intro via EA,,,,Send long email,,Hooks: axioms for cross-being trade-offs.
+Amartya Sen,Ethics/Philosophy,,Academic route; warm intro,,,,Send long email,,Hooks: policy-grade trade-off reasoning.
+Kwame Anthony Appiah,Ethics/Philosophy,,Academic route; warm intro,,,,Send long email,,Hooks: cosmopolitan pluralism as design principle.
+Onora O’Neill,Ethics/Philosophy,,Academic route; warm intro,,,,Send long email,,Hooks: consent-aware governance.
+Danielle Allen,Ethics/Philosophy,,Harvard route; warm intro,,,,Send long email,,Hooks: democratic stewardship in the AI age.
+David Chalmers,Cognition/Philosophy of Mind,,Academic route; warm intro,,,,Send long email,,Hooks: phenomenology prompts; texture of experience.
+Susan Schneider,Cognition/Philosophy of Mind,,Academic route; warm intro,,,,Send long email,,Hooks: safeguards for synthetic minds.
+Anil Seth,Cognitive Science,,Academic route; warm intro,,,,Send long email,,Hooks: embodied/affective constraints.
+Antonio Damasio,Cognitive Science,,Academic route; warm intro,,,,Send long email,,Hooks: affect & self; embodied constraints.
+Abeba Birhane,Justice/Global South,,Academic route; warm intro,,,,Send long email,,Hooks: relational datasets; power-aware curation.
+Ruha Benjamin,Justice/Global South,,Academic route; warm intro,,,,Send long email,,Hooks: design out structural harms at selection.
+Sabelo Mhlambi,Justice/Global South,,Community route; warm intro,,,,Send long email,,Hooks: Ubuntu-informed templates.
+Nanjala Nyabola,Justice/Global South,,Author/advocacy route; warm intro,,,,Send long email,,Hooks: language/policy constraints for emerging contexts.
+Indigenous Knowledge Keeper #1,Indigenous Knowledge,,Via trusted org partner,,,,Co-architect invite,,Hooks: set protocol norms; not token contributor.
+Indigenous Knowledge Keeper #2,Indigenous Knowledge,,Via trusted org partner,,,,Co-architect invite,,Hooks: set protocol norms; not token contributor.
+Indigenous Knowledge Keeper #3,Indigenous Knowledge,,Via trusted org partner,,,,Co-architect invite,,Hooks: set protocol norms; not token contributor.

@@ -1,0 +1,109 @@
+{
+  "version": "v0.2",
+  "gate_link": "https://witnessprotocol.info/gate",
+  "submission": {
+    "endpoint": "/api/assess/submit",
+    "method": "POST",
+    "content_type": "application/json"
+  },
+  "fields": [
+    {
+      "id": "language",
+      "type": "select",
+      "label": "Language",
+      "options": [
+        "Auto-detect",
+        "English",
+        "Dutch",
+        "French",
+        "German",
+        "Spanish",
+        "Other"
+      ],
+      "required": true
+    },
+    {
+      "id": "prompt_id",
+      "type": "select",
+      "label": "Choose your prompt",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "required": true
+    },
+    {
+      "id": "testimony",
+      "type": "longtext",
+      "label": "Your testimony",
+      "min_words": 250,
+      "required": true,
+      "hint": "20\u201330 minutes; texture over citations."
+    },
+    {
+      "id": "consent_archive",
+      "type": "checkbox",
+      "label": "I consent to my de\u2011identified testimony joining the public Archive",
+      "required": false,
+      "default": false
+    },
+    {
+      "id": "contact_optin",
+      "type": "radio",
+      "label": "May we contact you about an invitation?",
+      "options": [
+        "Yes",
+        "No"
+      ],
+      "required": true
+    },
+    {
+      "id": "contact_email",
+      "type": "email",
+      "label": "Email (if Yes)",
+      "required_if": {
+        "field": "contact_optin",
+        "equals": "Yes"
+      }
+    },
+    {
+      "id": "affiliation",
+      "type": "shorttext",
+      "label": "Affiliation (optional)"
+    },
+    {
+      "id": "region",
+      "type": "shorttext",
+      "label": "Region/Country (optional)"
+    },
+    {
+      "id": "confirm_privacy",
+      "type": "checkbox",
+      "label": "I understand testimony is de\u2011identified at ingestion and stored separately from contact info.",
+      "required": true
+    }
+  ],
+  "client_validation": [
+    {
+      "rule": "min_words",
+      "field": "testimony",
+      "count": 250
+    },
+    {
+      "rule": "required_if",
+      "field": "contact_email",
+      "condition": {
+        "field": "contact_optin",
+        "equals": "Yes"
+      }
+    }
+  ],
+  "post_submit": {
+    "message": "Thank you. You\u2019ll receive a confirmation shortly. Most decisions take 7\u201310 days.",
+    "redirect": "https://witnessprotocol.info/gate/thanks"
+  }
+}
