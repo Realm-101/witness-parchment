@@ -5,10 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const AssessmentFormStub = () => {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -16,15 +19,39 @@ const AssessmentFormStub = () => {
     
     setIsSubmitting(true);
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    // Reset form
-    setEmail("");
-    setIsSubmitting(false);
-    
-    // TODO: Show success toast
-    console.log("Assessment request submitted for:", email);
+    try {
+      const { data, error } = await supabase.functions.invoke('send-assessment-request', {
+        body: { email: email.trim() }
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      if (!data.success) {
+        throw new Error(data.error || 'Failed to send assessment request');
+      }
+
+      // Reset form
+      setEmail("");
+      
+      // Show success toast
+      toast({
+        title: "Request Submitted Successfully",
+        description: "Check your email for confirmation and next steps.",
+      });
+
+    } catch (error: any) {
+      console.error("Error submitting assessment request:", error);
+      
+      toast({
+        variant: "destructive",
+        title: "Submission Failed",
+        description: error.message || "Failed to submit assessment request. Please try again.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
