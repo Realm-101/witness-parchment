@@ -12,7 +12,9 @@ import { useToast } from '@/hooks/use-toast';
 interface AdminUser {
   id: string;
   email: string;
-  is_admin: boolean;
+  display_name: string;
+  avatar_url: string;
+  roles: string[];
   created_at: string;
 }
 
@@ -84,7 +86,7 @@ const AdminUsers = () => {
   const promoteToAdmin = async (userId: string) => {
     try {
       const { error } = await supabase.rpc('promote_user_to_admin', {
-        target_user_id: userId
+        _user_id: userId
       });
 
       if (error) throw error;
@@ -107,7 +109,7 @@ const AdminUsers = () => {
   const removeAdmin = async (userId: string) => {
     try {
       const { error } = await supabase.rpc('remove_admin_role', {
-        target_user_id: userId
+        _user_id: userId
       });
 
       if (error) throw error;
@@ -214,22 +216,22 @@ const AdminUsers = () => {
                     users.map((adminUser) => (
                       <div key={adminUser.id} className="flex items-center justify-between p-3 border border-border rounded-lg">
                         <div className="flex items-center space-x-3">
-                          {adminUser.is_admin ? (
+                          {adminUser.roles.includes('admin') ? (
                             <Shield className="h-4 w-4 text-primary" />
                           ) : (
                             <User className="h-4 w-4 text-muted-foreground" />
                           )}
                           <div>
-                            <div className="font-medium">{adminUser.email}</div>
+                            <div className="font-medium">{adminUser.display_name || adminUser.email}</div>
                             <div className="text-sm text-muted-foreground">
-                              {adminUser.is_admin ? 'Administrator' : 'User'}
+                              {adminUser.roles.includes('admin') ? 'Administrator' : 'User'}
                             </div>
                           </div>
                         </div>
                         
                         {adminUser.id !== user?.id && (
                           <div className="flex space-x-2">
-                            {adminUser.is_admin ? (
+                            {adminUser.roles.includes('admin') ? (
                               <Button
                                 variant="outline"
                                 size="sm"
