@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 
 
@@ -15,7 +14,6 @@ const AdminLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [resending, setResending] = useState(false);
   const { toast } = useToast();
 
   const from = location.state?.from?.pathname || '/admin';
@@ -46,24 +44,6 @@ const AdminLogin = () => {
     setIsLoading(false);
   };
 
-  const handleResend = async () => {
-    try {
-      setResending(true);
-      const redirectUrl = `${window.location.origin}/`;
-      const { error } = await supabase.auth.resend({
-        type: 'signup',
-        email: 'admin@witnessprotocol.info',
-        options: { emailRedirectTo: redirectUrl },
-      });
-      if (error) {
-        toast({ title: 'Resend failed', description: error.message, variant: 'destructive' });
-      } else {
-        toast({ title: 'Confirmation sent', description: 'Check admin@witnessprotocol.info for the email.' });
-      }
-    } finally {
-      setResending(false);
-    }
-  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-muted/30">
@@ -111,9 +91,6 @@ const AdminLogin = () => {
                 </div>
                 <Button type="submit" className="w-full" disabled={isLoading}>
                   {isLoading ? 'Signing In...' : 'Sign In'}
-                </Button>
-                <Button type="button" variant="outline" className="w-full" onClick={handleResend} disabled={resending}>
-                  {resending ? 'Resending...' : 'Resend confirmation email'}
                 </Button>
               </form>
             </CardContent>

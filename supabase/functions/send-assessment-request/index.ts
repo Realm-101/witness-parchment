@@ -8,6 +8,33 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+// Rate limiting map to prevent abuse
+const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
+const RATE_LIMIT_MAX = 5; // Max requests per IP
+const RATE_LIMIT_WINDOW = 60 * 60 * 1000; // 1 hour in milliseconds
+
+function isValidEmail(email: string): boolean {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now();
+  const clientData = rateLimitMap.get(ip);
+  
+  if (!clientData || now > clientData.resetTime) {
+    rateLimitMap.set(ip, { count: 1, resetTime: now + RATE_LIMIT_WINDOW });
+    return true;
+  }
+  
+  if (clientData.count >= RATE_LIMIT_MAX) {
+    return false;
+  }
+  
+  clientData.count++;
+  return true;
+}
+
 interface AssessmentRequestEmail {
   email: string;
 }
@@ -19,11 +46,35 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
+    // Get client IP for rate limiting
+    const clientIP = req.headers.get('x-forwarded-for') || req.headers.get('x-real-ip') || 'unknown';
+    
+    // Check rate limit
+    if (!checkRateLimit(clientIP)) {
+      console.log(`Rate limit exceeded for IP: ${clientIP}`);
+      return new Response(
+        JSON.stringify({ 
+          success: false,
+          error: 'Too many requests. Please try again later.' 
+        }),
+        {
+          status: 429,
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        }
+      );
+    }
+
     const { email }: AssessmentRequestEmail = await req.json();
 
     if (!email || !email.trim()) {
       throw new Error("Email address is required");
     }
+
+    if (!isValidEmail(email)) {
+      throw new Error("Please provide a valid email address");
+    }
+
+    console.log(`Processing assessment request from: ${email} (IP: ${clientIP})`);
 
     // Send confirmation email to the user
     const confirmationResponse = await resend.emails.send({
@@ -74,6 +125,7 @@ const handler = async (req: Request): Promise<Response> => {
             <p><strong>Email:</strong> ${email}</p>
             <p><strong>Submitted:</strong> ${new Date().toISOString()}</p>
             <p><strong>Source:</strong> Assessment Request Form</p>
+            <p><strong>Client IP:</strong> ${clientIP}</p>
           </div>
           
           <p>Please review and follow up with the personalized assessment invitation.</p>
