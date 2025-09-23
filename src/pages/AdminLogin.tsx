@@ -86,15 +86,15 @@ const AdminLogin = () => {
             <CardContent>
               <form onSubmit={handleSignIn} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="signin-email">Username</Label>
+                  <Label htmlFor="signin-email">Email</Label>
                   <Input
                     id="signin-email"
-                    type="text"
+                    type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
                     disabled={isLoading}
-                    placeholder="AdminWP"
+                    placeholder="Enter your email"
                   />
                 </div>
                 <div className="space-y-2">
@@ -106,7 +106,7 @@ const AdminLogin = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                     disabled={isLoading}
-                    placeholder="AdminWP@123"
+                    placeholder="Enter your password"
                   />
                 </div>
                 <Button type="submit" className="w-full" disabled={isLoading}>

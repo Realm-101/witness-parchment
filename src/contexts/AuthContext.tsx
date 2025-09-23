@@ -88,78 +88,17 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   const signIn = async (email: string, password: string) => {
-    // Handle the special admin credentials
-    let actualEmail = email;
-    if (email === 'AdminWP') {
-      actualEmail = 'admin@witnessprotocol.info';
-    }
-
     const { error } = await supabase.auth.signInWithPassword({
-      email: actualEmail,
+      email,
       password,
     });
 
     if (error) {
-      // If the admin user doesn't exist and these are the special credentials, create it
-      if (email === 'AdminWP' && password === 'AdminWP@123' && error.message.includes('Invalid login credentials')) {
-        const { error: signUpError } = await supabase.auth.signUp({
-          email: actualEmail,
-          password,
-          options: {
-            emailRedirectTo: `${window.location.origin}/`
-          }
-        });
-
-        if (signUpError) {
-          toast({
-            title: "Setup Failed",
-            description: signUpError.message,
-            variant: "destructive",
-          });
-          return { error: signUpError };
-        }
-
-        // Try to sign in again after creating the account
-        const { error: secondSignInError } = await supabase.auth.signInWithPassword({
-          email: actualEmail,
-          password,
-        });
-
-        if (secondSignInError) {
-          toast({
-            title: "Sign In Failed",
-            description: secondSignInError.message,
-            variant: "destructive",
-          });
-          return { error: secondSignInError };
-        }
-
-        // Grant admin role to the newly created user
-        setTimeout(async () => {
-          try {
-            const { data: { user } } = await supabase.auth.getUser();
-            if (user) {
-              await supabase.from('user_roles').insert({
-                user_id: user.id,
-                role: 'admin'
-              });
-            }
-          } catch (roleError) {
-            console.error('Error granting admin role:', roleError);
-          }
-        }, 1000);
-
-        toast({
-          title: "Admin Account Created",
-          description: "Welcome! Your admin account has been set up.",
-        });
-      } else {
-        toast({
-          title: "Sign In Failed",
-          description: error.message,
-          variant: "destructive",
-        });
-      }
+      toast({
+        title: "Sign In Failed",
+        description: error.message,
+        variant: "destructive",
+      });
     } else {
       toast({
         title: "Welcome back!",
