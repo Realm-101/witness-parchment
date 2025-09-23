@@ -32,6 +32,14 @@ const Header = () => {
               >
                 Journal
               </Link>
+              <a 
+                href="https://witnessprotocol.online" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors focus-ring rounded-md px-2 py-1"
+              >
+                Frontend & Decks
+              </a>
               {/* Conditional link for authenticated users */}
               <Link 
                 to="/dialogues" 
