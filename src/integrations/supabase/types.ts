@@ -14,6 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
+      assessment_requests: {
+        Row: {
+          client_ip: string | null
+          created_at: string
+          email: string
+          error_message: string | null
+          id: string
+          resend_response: Json | null
+          source: string | null
+          status: string
+        }
+        Insert: {
+          client_ip?: string | null
+          created_at?: string
+          email: string
+          error_message?: string | null
+          id?: string
+          resend_response?: Json | null
+          source?: string | null
+          status?: string
+        }
+        Update: {
+          client_ip?: string | null
+          created_at?: string
+          email?: string
+          error_message?: string | null
+          id?: string
+          resend_response?: Json | null
+          source?: string | null
+          status?: string
+        }
+        Relationships: []
+      }
       blog_posts: {
         Row: {
           author_id: string
