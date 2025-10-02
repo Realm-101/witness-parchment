@@ -85,9 +85,9 @@ const handler = async (req: Request): Promise<Response> => {
     let resendResponse = null;
 
     try {
-      // Send confirmation email to the user
+      // Send confirmation email to the user (use verified domain)
       const confirmationResponse = await resend.emails.send({
-        from: "Witness Protocol <onboarding@resend.dev>",
+        from: "Witness Protocol <no-reply@witnessprotocol.info>",
         to: [email],
         subject: "Assessment Request Received - Witness Protocol",
         html: `
@@ -119,11 +119,16 @@ const handler = async (req: Request): Promise<Response> => {
         `,
       });
 
+      // Resend SDK returns { data, error }; treat error as failure
+      if ((confirmationResponse as any)?.error) {
+        throw new Error((confirmationResponse as any).error.message || 'Failed to send confirmation email');
+      }
+
       console.log("Confirmation email sent successfully:", confirmationResponse);
 
-      // Send notification to the protocol team
+      // Send notification to the protocol team (use verified domain)
       const notificationResponse = await resend.emails.send({
-        from: "Witness Protocol <notifications@resend.dev>",
+        from: "Witness Protocol <notifications@witnessprotocol.info>",
         to: ["support@witnessprotocol.info"],
         subject: "New Assessment Request - Witness Protocol",
         html: `
@@ -142,6 +147,10 @@ const handler = async (req: Request): Promise<Response> => {
         `,
       });
 
+      if ((notificationResponse as any)?.error) {
+        throw new Error((notificationResponse as any).error.message || 'Failed to send notification email');
+      }
+
       console.log("Notification email sent successfully:", notificationResponse);
 
       requestStatus = 'sent';
@@ -150,7 +159,7 @@ const handler = async (req: Request): Promise<Response> => {
       console.error("Resend error:", emailError);
       requestStatus = 'failed';
       errorMessage = emailError.message || 'Failed to send email';
-      resendResponse = { error: emailError.message, details: emailError };
+      resendResponse = { error: errorMessage };
     }
 
     // Log to database
